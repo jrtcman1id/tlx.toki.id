@@ -1,0 +1,296 @@
+1. Perhatikan fungsi berikut:
+
+int banyak(int x) {
+  if (x < 0) {
+    return 0;
+  } else {
+    return x + banyak(x - 2);
+  }
+}
+
+Jika dipanggil banyak(5), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+banyak(5) = 5 + banyak(3)
+banyak(3) =  3 + banyak(1)
+banyak(1) = 1 + banyak(-1)
+banyak(-1) = 0 {ini base case}
+
+dengan substitusi
+banyak(5) = (5 + (3 + (1 + (0)))) = 9 (C)
+
+2. Perhatikan prosedur berikut:
+
+void draw(int x) {
+  if (x > 0) {
+    draw(x-1);
+    for (int i = 0; i < x; i++) {
+      printf("*");
+    }
+    printf("\n");
+  }
+}
+
+Berikut adalah beberapa kemungkinan keluaran dipanggil draw(4):
+
+Jawaban:
+draw(4) = 
+  draw(3)
+  ****
+draw(3) = 
+  draw(2)
+  ***
+draw(2) =
+  draw(1)
+  **
+draw(1) =
+  draw(0)
+  *
+draw(0) = 
+  {do nothing, ini base case}
+
+dengan substitusi
+draw(4) = 
+  *
+  **
+  ***
+  **** (D)
+
+3. Perhatikan fungsi berikut:
+
+int jabatan(int a, int b) {
+  if (b == 0) {
+    return 1;
+  } else if (b % 2 == 1) {
+    return a * jabatan(a, b - 1);
+  } else {
+    int temp = jabatan(a, b / 2);
+    return temp * temp;
+  }
+}
+
+Jika dipanggil jabatan(2, 5), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+jabatan(2, 5) = 2 * jabatan(2, 4)
+jabatan(2, 4) = (jabatan(2, 2))^2
+jabatan(2, 2) = (jabatan(2, 1))^2
+jabatan(2, 1) = 2 * jabatan(2, 0)
+jabatan(2, 0) = 1 {ini base case}
+
+dengan substitusi
+jabatan(2, 5) = 2 * ((2 * 1)^2)^2 = 32 (E)
+
+4. Perhatikan fungsi berikut:
+
+int kardus(int a, int b) {
+  if (a > b) {
+    return 1 + kardus(a - 1, b);
+  } else if (a < b) {
+    return 1 + kardus(a, b - 1);
+  } else {
+    return a + b;
+  }
+}
+
+Jika dipanggil kardus(12, 17), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+kardus(12, 17) = 1 + kardus(12, 16)
+kardus(12, 16) = 1 + kardus(12, 15)
+kardus(12, 15) = 1 + kardus(12, 14)
+kardus(12, 14) = 1 + kardus(12, 13)
+kardus(12, 13) = 1 + kardus(12, 12)
+kardus(12, 12) = 12 + 12 {ini base case}
+
+dengan substitusi
+kardus(12, 17) = (1 + (1 + (1 + (1 + (1 + (12 + 12)))))) = 29 (A)
+
+5. Perhatikan fungsi berikut:
+
+int ekor(int a, int b, int t) {
+  if (b == 0) {
+    return t;
+  } else {
+    return ekor(a, b - 1, t * a);
+  }
+}
+
+Jika dipanggil ekor(3, 4, 2), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+ekor(3, 4, 2) = ekor(3, 3, 6)
+ekor(3, 3, 6) = ekor(3, 2, 18)
+ekor(3, 2, 18) = ekor(3, 1, 54)
+ekor(3, 1, 54) = ekor(3, 0, 162)
+ekor(3, 0, 162) = 162 {ini base case}
+
+dengan substitusi:
+ekor(3, 4, 2) = ((((162)))) = 162 (E)
+
+6. Perhatikan prosedur berikut:
+
+procedure majuMundur(str: string; i: longint);
+begin
+    if (i = length(str)) then begin
+        write(str[i]);
+    end else begin
+        write(str[i]);
+        majuMundur(str, i + 1);
+        write(str[i]);
+    end;
+end;
+
+Jika dipanggil majuMundur('bebek', 1), maka yang tercetak adalah:
+
+Jawaban:
+asumsi string 'bebek' mulai dari index 1
+majuMundur('bebek', 1) = 
+  'b'
+  majuMundur('bebek', 2)
+  'b'
+majuMundur('bebek', 2) =
+  'e'
+  majuMundur('bebek', 3)
+  'e'
+majuMundur('bebek', 3) = 
+  'b'
+  majuMundur('bebek', 4)
+  'b'
+majuMundur('bebek', 4) = 
+  'e'
+  majuMundur('bebek', 5)
+  'e'
+majuMundur('bebek', 5) = 
+  'k' {ini base case}
+
+dengan substitusi
+majuMundur('bebek', 1) =
+  'b'
+  'e'
+  'b'
+  'e'
+  'k'
+  'e'
+  'b'  
+  'e'
+  'b' (C)
+
+7. Perhatikan fungsi berikut:
+
+// "Janjikan" pembuatan fungsi terlebih dahulu
+int ping(int a);
+int pong(int a);
+
+int ping(int a) {
+  if (a == 0) {
+    return 0;
+  } else {
+    return 1 + pong(a - 1);
+  }
+}
+
+int pong(int a) {
+  if (a == 0) {
+    return 0;
+  } else {
+    return 2 + ping(a - 1);
+  }
+}
+
+Jika dipanggil ping(5), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+ping(5) = 1 + pong(4)
+pong(4) = 2 + ping(3)
+ping(3) = 1 + pong(2)
+pong(2) = 2 + ping(1)
+ping(1) = 1 + pong(0)
+pong(0) = 0 {ini base case}
+
+dengan substitusi
+ping(5) = 1 + (2 + (1 + (2 + (1 + (0))))) = 7 (A)
+
+8. Perhatikan fungsi berikut:
+
+string wolo(string s, int i) {
+  if (s.size() == i) {
+    return "";
+  } else {
+    return s[s.size()-i-1] + wolo(s, i+1);
+  }
+}
+
+Jika dipanggil wolo("dengklek", 0), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+wolo("dengklek", 0) = s[7] + wolo("dengklek", 1)
+wolo("dengklek", 1) = s[6] + wolo("dengklek", 2)
+wolo("dengklek", 2) = s[5] + wolo("dengklek", 3)
+wolo("dengklek", 3) = s[4] + wolo("dengklek", 4)
+wolo("dengklek", 4) = s[3] + wolo("dengklek", 5)
+wolo("dengklek", 5) = s[2] + wolo("dengklek", 6)
+wolo("dengklek", 6) = s[1] + wolo("dengklek", 7)
+wolo("dengklek", 7) = s[0] + wolo("dengklek", 8)
+wolo("dengklek", 8) = "" {ini base case}
+
+wolo("dengklek", 0) = 'k' + wolo("dengklek", 1)
+wolo("dengklek", 1) = 'e' + wolo("dengklek", 2)
+wolo("dengklek", 2) = 'l' + wolo("dengklek", 3)
+wolo("dengklek", 3) = 'k' + wolo("dengklek", 4)
+wolo("dengklek", 4) = 'g' + wolo("dengklek", 5)
+wolo("dengklek", 5) = 'n' + wolo("dengklek", 6)
+wolo("dengklek", 6) = 'e' + wolo("dengklek", 7)
+wolo("dengklek", 7) = 'd' + wolo("dengklek", 8)
+wolo("dengklek", 8) = "" {ini base case}
+
+dengan substitusi
+
+wolo("dengklek", 0) = 'k' + ('e' + ('l' + ('k' + ('g' + ('n' + ('e + ('d' + (""))))))))
+  = "kelkgned" (B)
+
+9.
+
+Perhatikan fungsi berikut:
+
+int jdd(int x) {
+  if (x == 0) {
+    return 0;
+  } else {
+    return jdd(x / 100) + (x % 100);
+  }
+}
+
+Jika dipanggil jdd(19823), maka nilai yang dikembalikan adalah:
+
+Jabawan:
+jdd(19823) = jdd(198) + 23
+jdd(198) = jdd(1) + 98
+jdd(1) = jdd(0) + 1
+jdd(0) = 0 {ini base case}
+
+dengan substitusi
+jdd(19823) = ((((0) + 1) + 98) + 23) = 122 (A)
+
+10. Perhatikan fungsi berikut:
+
+int janji(int p, int q, int t) {
+  if (p == q) {
+    return t;
+  } else if (t % 2 == 1) {
+    return 2 + janji(p + 1, q, t + 1);
+  } else {
+    return 2 + janji(p, q - 1, t + 1);
+  }
+}
+
+Jika dipanggil janji(10, 8, 0), maka nilai yang dikembalikan adalah:
+
+Jawaban:
+janji(10, 8, 0) = 2 + janji(10, 7, 1)
+janji(10, 7, 1) = 2 + janji(11, 7, 2)
+janji(11, 7, 2) = 2 + janji(11, 6, 3)
+janji(11, 6, 3) = 2 + janji(12, 6, 4)
+.
+.
+dari pola kita dapat diketahui kondisi p == q tidak akan pernah terpenuhi (E)
