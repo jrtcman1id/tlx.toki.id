@@ -1,0 +1,159 @@
+1. Perhatikan prosedur berikut:
+
+void batang(int x) {
+  if (x == 0) {
+    printf("daun\n");
+  } else {
+    batang(x - 1);
+    batang(x - 1);
+  }
+}
+
+Jika dipanggil batang(3), maka berapa kali tulisan 'daun' dicetak?
+
+Jawaban:
+                            
+                              batang(0) "daun"
+                    batang(1) batang(0) "daun"
+
+                              batang(0) "daun"
+          batang(2) batang(1) batang(0) "daun"
+batang(3) 
+          batang(2) batang(1) batang(0) "daun"
+                              batang(0) "daun"
+
+                    batang(1) batang(0) "daun"
+                              batang(0) "daun"
+
+"daun" dicetak 8 kali (D)
+
+2. Perhatikan prosedur berikut:
+
+void rindang(int x) {
+  if (x > 0) {
+    for (int i = 0; i < x; i++) {
+      rindang(x - 1);
+    }
+  }
+}
+
+Kompleksitas paling tepat untuk prosedur tersebut jika dipanggil dengan rindang(N) adalah:
+
+dari fungsi diatas diperoleh jumlah iterasi
+N x (N - 1) x (N - 2) x .. x (1) = N! 
+
+kompleksitas diperoleh O(N!)   (D)
+
+
+Untuk dua soal berikutnya, perhatikan program berikut:
+
+#include <cstdio>
+#include <string>
+
+int N = 5;
+int arr[5];
+
+bool wow(int i, int t) {
+  if (i >= N) {
+    return t == 0;
+  } else {
+    return wow(i + 1, t - arr[i]) || wow(i + 1, t);
+  }
+}
+
+int main() {
+  arr[0] = 1;
+  arr[1] = 3;
+  arr[2] = 5;
+  arr[3] = 8;
+  arr[4] = 11;
+
+  printf("%d\n", wow(0, X));
+  printf("%d\n", wow(0, 6));
+  printf("%d\n", wow(0, 9));
+}
+
+3. Jika program dijalankan, maka secara berturut-turut yang dicetak adalah:
+
+Jawaban:                          
+                                                            wow(5, X-28)
+                                              wow(4, X-17)  wow(5, X-17)
+                                                            wow(5, X-20)
+                                  wow(3, X-9) wow(4, X-9)   wow(5, X-9)
+                                                            wow(5, X-23)
+                                              wow(4, X-12)  wow(5, X-12)
+                                                            wow(5, X-15)
+                      wow(2, X-4) wow(3, X-4) wow(4, X-4)   wow(5, X-4)
+                                                            wow(5, X-25)
+                                              wow(4, X-14)  wow(5, X-14)
+                                                            wow(5, X-17)
+                                  wow(3, X-6) wow(4, X-6)   wow(5, X-6)
+                                                            wow(5, X-20)
+                                              wow(4, X-9)   wow(5, X-9)
+                                                            wow(5, X-12)              
+          wow(1, X-1) wow(2, X-1) wow(3, X-1) wow(4, X-1)   wow(5, X-1)
+wow(0, X)           
+          wow(1, X)   wow(2, X-3) wow(3, X-8) wow(4, X-16)  wow(5, X-27)
+                                                            wow(5, X-16)  
+                                              wow(4, X-8)   wow(5, X-19)
+                                                            wow(5, X-8) 
+                                  wow(3, X-3) wow(4, X-11)  wow(5, X-22)
+                                                            wow(5, X-11)
+                                              wow(4, X-3)   wow(5, X-14)
+                                                            wow(5, X-3)
+                      wow(2, X)   wow(3, X-5) wow(4, X-13)  wow(5, X-24)
+                                                            wow(5, X-13)
+                                              wow(4, X-5)   wow(5, X-16)
+                                                            wow(5, X-5)
+                                  wow(3, X)   wow(4, X-8)   wow(4, X-19)
+                                                            wow(4, X-8)
+                                              wow(4, X)     wow(4, X-11)
+                                                            wow(4, X)
+
+hasil true bila wow(5, Y), dengan ada yang memenuhi Y=0
+- untuk X=2, diperoleh false (0)
+- untuk X=6, diperoleh true (1)
+- untuk X=9, diperoleh true (1)     (B)
+
+4. Kompleksitas pemanggilan fungsi wow adalah:
+
+Jawaban: 
+dari diatas diperoleh jumlah pemanggilan wow() sebagai berikut
+
+1 + 2 + 4 + 8 + 16 + ...
+
+deret diatas adalah deret geometri
+
+Sn = a1 + a1*r + a1*r^2 + a1*r^3 + a1*r^4 + ...
+Sn = a1 * (1 - r^N)/(1 - r)
+
+diperoleh 
+Sn = 1 * (1 - 2^N)/(1 - 2)
+
+maka diperoleh komplesitas O(2^N)   (C)
+
+                                  
+5. Perhatikan prosedur berikut:
+
+void gali(int x) {
+  printf("%d_", x);
+  if (x > 1) {
+    gali(x / 4);
+    gali(x / 2);
+  }
+  printf("%d_", -x);
+}
+
+Jika dipanggil gali(4), maka yang dicetak adalah:
+
+Jawaban:
+
+          [2]gali(1)
+[1]gali(4)
+          [3]gali(2)  [4]gali(0)
+                      [5]gali(1)
+
+dari proses rekursi diatas diperoleh
+4_(1_-1_2_(0_0_1_-1_)-2_)-4_
+4_1_-1_2_0_0_1_-1_-2_-4_     (A)
+
